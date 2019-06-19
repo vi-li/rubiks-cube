@@ -230,12 +230,11 @@ public class LayerRotate : MonoBehaviour
     }
     public void RotateLayer(ELayer aLayer, bool aClockwise)
     {
+        // Preventing touch interference
         if (m_Rotating || 
-            largeCollider.GetComponent<MultiTouchRubiksRotate>().m_largeRotating ||
-            largeCollider.GetComponent<MultiTouchRubiksRotate>().m_startedOnTable)
+            largeCollider.GetComponent<MultiTouchRubiksRotate>().m_largeRotating)
         {
-            //Debug.Log("Cancelled!");
-            return;         // TODO: FOR TOUCH INTERFERENCE
+            return;
         }
 
         if (aClockwise)

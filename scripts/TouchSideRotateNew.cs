@@ -84,6 +84,65 @@ public class TouchSideRotateNew : MonoBehaviour
         }
     }
 
+    /*
+    SMALL COLLIDERS ARRAY SETUP
+    Elem:      Collider:
+    0           0F
+    1           1F
+    2           2F
+    3           9F
+    4           10F
+    5           11F
+    6           18F
+    7           19F
+    8           20F
+    9           20R
+    10          23R
+    11          26R
+    12          11R
+    13          14R
+    14          17R
+    15          2R
+    16          5R
+    17          8R
+    18          26B
+    19          25B
+    20          24B
+    21          17B
+    22          16B
+    23          15B
+    24          8B
+    25          7B
+    26          6B
+    27          24L
+    28          21L
+    29          18L
+    30          15L
+    31          12L
+    32          9L
+    33          6L
+    34          3L
+    35          0L
+    36          26U
+    37          23U
+    38          20U
+    39          25U
+    40          22U
+    41          19U
+    42          24U
+    43          21U
+    44          18U
+    45          8D
+    46          5D
+    47          2D
+    48          7D
+    49          4D
+    50          1D
+    51          6D
+    52          3D
+    53          0D
+    */
+
     void checkSwipe(Transform fT, Transform sT, bool clockwise)
     {
         // FRONT

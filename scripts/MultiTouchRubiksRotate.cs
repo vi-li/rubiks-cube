@@ -7,8 +7,7 @@ public class MultiTouchRubiksRotate : MonoBehaviour
   public int cubeIndex;
   public float rotSpeed = 10f;
   public float MAX_RAY_DISTANCE = 100.0f;
-  public bool m_largeRotating = false;
-  public bool m_startedOnTable = false;
+  public bool m_largeRotating = false;        // Exists so that rotation can continue over cube
 
   void Start()
   {
@@ -25,42 +24,47 @@ public class MultiTouchRubiksRotate : MonoBehaviour
       {
         Ray ray = Camera.main.ScreenPointToRay(myTouches[i].position);
         RaycastHit hit;
-        //Vector3 touchPosition = Camera.main.ScreenToWorldPoint(myTouches[i].position);
 
+        // TODO: remove when done
         Debug.DrawRay(ray.origin, ray.direction*MAX_RAY_DISTANCE, Color.red, 2);
         
         Physics.Raycast(ray, out hit, MAX_RAY_DISTANCE);
 
-        if ((hit.transform.gameObject.tag == ("rubiksCubesLColl" + cubeIndex)
-           && myTouches[i].phase == TouchPhase.Began)
-
-           || (m_largeRotating &&
-              (hit.transform.gameObject.tag == ("rubiksCubesLColl" + cubeIndex) || hit.transform.gameObject.tag == ("smallColliders" + cubeIndex))))
+        // Begin rotation
+        if (!m_largeRotating && 
+            myTouches[i].phase == TouchPhase.Began &&
+            hit.transform.gameObject.tag == ("rubiksCubesLColl" + cubeIndex))
         {
-          if (!m_largeRotating && myTouches[i].phase == TouchPhase.Began) { m_largeRotating = true; }
+          m_largeRotating = true;
+        }
 
+        // Continue rotating even if finger moves over cube
+        if (m_largeRotating && (hit.transform.gameObject.tag == ("rubiksCubesLColl" + cubeIndex) || hit.transform.gameObject.tag == ("smallColliders" + cubeIndex)))
+        {
           cubeItself.transform.Rotate(myTouches[i].deltaPosition.y * rotSpeed * Time.deltaTime, 
                                       myTouches[i].deltaPosition.x * rotSpeed * Time.deltaTime, 
                                       0f, 
                                       Space.World);
+        }
 
-          if (myTouches[i].phase == TouchPhase.Ended)
-          {
-            m_largeRotating = false;
-          }
+        // End rotation
+        if (myTouches[i].phase == TouchPhase.Ended)
+        {
+          m_largeRotating = false;
         }
       }   
     }
   }
 
-  void OnMouseDrag()
-  {
-    float rotX = Input.GetAxis("Mouse X")*rotSpeed*Mathf.Deg2Rad;
-    float rotY = Input.GetAxis("Mouse Y")*rotSpeed*Mathf.Deg2Rad;
+  // Debugging purposes
+  // void OnMouseDrag()
+  // {
+  //   float rotX = Input.GetAxis("Mouse X")*rotSpeed*Mathf.Deg2Rad;
+  //   float rotY = Input.GetAxis("Mouse Y")*rotSpeed*Mathf.Deg2Rad;
 
-    cubeItself.transform.RotateAround(Vector3.forward, -rotX);
-    cubeItself.transform.RotateAround(Vector3.right, rotY);
-  }
+  //   cubeItself.transform.RotateAround(Vector3.forward, -rotX);
+  //   cubeItself.transform.RotateAround(Vector3.right, rotY);
+  // }
 
 }
 
