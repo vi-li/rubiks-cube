@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public enum ELayer
@@ -195,7 +194,7 @@ public class LayerRotate : MonoBehaviour
     {
         if (rotatePivot == null)
         {
-            rotatePivot = new GameObject("rotate pivot").transform;
+            rotatePivot = new GameObject("Rotate Pivot").transform;
             rotatePivot.SetParent(transform, true);
         }
     }
