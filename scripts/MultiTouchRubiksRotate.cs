@@ -57,14 +57,14 @@ public class MultiTouchRubiksRotate : MonoBehaviour
   }
 
   // Debugging purposes
-  // void OnMouseDrag()
-  // {
-  //   float rotX = Input.GetAxis("Mouse X")*rotSpeed*Mathf.Deg2Rad;
-  //   float rotY = Input.GetAxis("Mouse Y")*rotSpeed*Mathf.Deg2Rad;
+  void OnMouseDrag()
+  {
+    float rotX = Input.GetAxis("Mouse X")*rotSpeed*Mathf.Deg2Rad;
+    float rotY = Input.GetAxis("Mouse Y")*rotSpeed*Mathf.Deg2Rad;
 
-  //   cubeItself.transform.RotateAround(Vector3.forward, -rotX);
-  //   cubeItself.transform.RotateAround(Vector3.right, rotY);
-  // }
+    cubeItself.transform.RotateAround(Vector3.forward, -rotX);
+    cubeItself.transform.RotateAround(Vector3.right, rotY);
+  }
 
 }
 

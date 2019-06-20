@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class TouchSideRotateNew : MonoBehaviour
+public class TouchSideRotateMaster : MonoBehaviour
 {
     /*  Array layout
      *       c24  c25  c26
@@ -37,7 +37,7 @@ public class TouchSideRotateNew : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        actualCubesOuter = new GameObject[cubeIndex];
+
     }
 
     // Update is called once per frame

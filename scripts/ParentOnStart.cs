@@ -7,14 +7,13 @@ public class ParentOnStart : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foreach (GameObject outerCube in outerCubes)
-        {
-            outerCube.transform.parent = transform;
-        }
     }
     // Update is called once per frame
     void Update()
     {
-        
+        foreach (GameObject outerCube in outerCubes)
+        {
+            outerCube.transform.rotation = transform.rotation;
+        }
     }
 }
