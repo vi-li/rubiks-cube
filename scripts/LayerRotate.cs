@@ -201,8 +201,8 @@ public class LayerRotate : MonoBehaviour
  
     private void Update()
     {
-        // if (m_Rotating)  // Commented due to duplicate below
-        //     return;
+        if (m_Rotating)
+            return;
         bool counterclockwise = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
         if (Input.GetKeyDown(KeyCode.F)) RotateLayer(ELayer.F, !counterclockwise);
         else if (Input.GetKeyDown(KeyCode.B)) RotateLayer(ELayer.B, !counterclockwise);
