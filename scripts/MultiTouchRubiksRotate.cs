@@ -29,23 +29,17 @@ public class MultiTouchRubiksRotate : MonoBehaviour
         Debug.DrawRay(ray.origin, ray.direction*MAX_RAY_DISTANCE, Color.red, 2);
         
         Physics.Raycast(ray, out hit, MAX_RAY_DISTANCE);
-        //Debug.Log("BEFORE IFs, tag: " + hit.transform.gameObject.tag + "   cubeIndex: " + cubeIndex);
-
         // Begin rotation
         if (!m_largeRotating && 
             myTouches[i].phase == TouchPhase.Began &&
             hit.transform.gameObject.tag == ("rubiksCubesLColl" + cubeIndex))
         {
-          //Debug.Log("largeRotating was false and the touch is in start phase and you hit LColl, largeRotating is true");
           m_largeRotating = true;
         }
 
-        //Debug.Log("largeRotating is now true, hitting: " + hit.transform.gameObject.tag);
-        //Debug.Log("cubeIndex is: " + cubeIndex);
         // Continue rotating even if finger moves over cube
         if (m_largeRotating && (hit.transform.gameObject.tag == ("rubiksCubesLColl" + cubeIndex) || hit.transform.gameObject.tag == ("smallColliders" + cubeIndex)))
         {
-          //Debug.Log("trying to rotate!");
           cubeItself.transform.Rotate(myTouches[i].deltaPosition.y * rotSpeed * Time.deltaTime, 
                                       myTouches[i].deltaPosition.x * rotSpeed * Time.deltaTime, 
                                       0f, 
@@ -55,7 +49,6 @@ public class MultiTouchRubiksRotate : MonoBehaviour
         // End rotation
         if (myTouches[i].phase == TouchPhase.Ended)
         {
-          //Debug.Log("touch ended. largeRotating is false");
           m_largeRotating = false;
         }
       }   
@@ -63,14 +56,14 @@ public class MultiTouchRubiksRotate : MonoBehaviour
   }
 
   // Debugging purposes
-  // void OnMouseDrag()
-  // {
-  //   float rotX = Input.GetAxis("Mouse X")*rotSpeed*Mathf.Deg2Rad;
-  //   float rotY = Input.GetAxis("Mouse Y")*rotSpeed*Mathf.Deg2Rad;
+  void OnMouseDrag()
+  {
+    float rotX = Input.GetAxis("Mouse X")*rotSpeed*Mathf.Deg2Rad;
+    float rotY = Input.GetAxis("Mouse Y")*rotSpeed*Mathf.Deg2Rad;
 
-  //   cubeItself.transform.RotateAround(Vector3.forward, -rotX);
-  //   cubeItself.transform.RotateAround(Vector3.right, rotY);
-  // }
+    cubeItself.transform.RotateAround(Vector3.forward, -rotX);
+    cubeItself.transform.RotateAround(Vector3.right, rotY);
+  }
 
 }
 
