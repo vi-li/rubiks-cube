@@ -1,12 +1,13 @@
 using System.Collections;
 using UnityEngine;
 
-public class ParentOnStart : MonoBehaviour
+public class MatchRotationOnStart : MonoBehaviour
 {
     public GameObject[] outerCubes;
     // Start is called before the first frame update
     void Start()
     {
+
     }
     // Update is called once per frame
     void Update()
