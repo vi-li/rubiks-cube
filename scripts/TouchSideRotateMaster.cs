@@ -29,6 +29,7 @@ public class TouchSideRotateMaster : MonoBehaviour
     public float MIN_SWIPE_LENGTH = 0.5f;
     public float MAX_RAY_DISTANCE = 100.0f;
     public GameObject actualCube;
+    public GameObject largeCollider;
     public int cubeIndex; // from 0 to (number of rubik's cubes - 1), master should be largest value
     public GameObject[] actualCubesOuter;
     public Transform[] Colliders = new Transform[SM_COLL_ARR_SIZE];
@@ -53,7 +54,7 @@ public class TouchSideRotateMaster : MonoBehaviour
                 RaycastHit hit;
                 Physics.Raycast(ray, out hit, MAX_RAY_DISTANCE);
 
-                if (hit.collider.tag == ("smallColliders" + cubeIndex))
+                if (hit.collider.tag == ("smallColliders" + cubeIndex) && !largeCollider.GetComponent<MultiTouchRubiksRotate>().m_largeRotating)
                 {
                     // Debug.Log(hit.transform.name);
 
