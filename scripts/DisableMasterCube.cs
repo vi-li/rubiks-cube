@@ -5,6 +5,8 @@ using UnityEngine;
 public class DisableMasterCube : MonoBehaviour
 {
     public float MAX_RAY_DISTANCE = 100.0f;
+    public float fadeAnimationLength = 10f; // in seconds
+    public GameObject fadeCube;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,16 +25,16 @@ public class DisableMasterCube : MonoBehaviour
                 RaycastHit hit;
                 Physics.Raycast(ray, out hit, MAX_RAY_DISTANCE);
 
-                if (hit.transform.gameObject.tag == "switchScene")
+                if (myTouches[i].phase == TouchPhase.Began && hit.transform.gameObject.tag == "switchScene")
                 {
-                    unloadMasterCube();
+                    fadeOut();
                 }
             }   
         }
     }
 
-    void unloadMasterCube()
+    void fadeOut()
     {
-        SceneManager.LoadScene("RubiksCubesGroup");
+        fadeCube.GetComponent<Animator>().SetBool("fadeOutToGroup", true);
     }
 }

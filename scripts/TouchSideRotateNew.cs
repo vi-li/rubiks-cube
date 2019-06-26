@@ -14,7 +14,7 @@ public class TouchSideRotateNew : MonoBehaviour
      *   |              |
      *   |   c6   c7   c8
      *   | c3   c4   c5
-     *   c0---c1---c2       Front in this POV is RED. Up is WHITE.
+     *   c0---c1---c2       Front in this POV is RED. Up is WHITE. 
      *
      * */
 
@@ -72,12 +72,20 @@ public class TouchSideRotateNew : MonoBehaviour
                             readyToDetectSecond = false;
                         }
 
-                        if (secondTouchTrans != null) checkSwipe(firstTouchTrans, secondTouchTrans, true);
+                        if (secondTouchTrans != null) 
+                        {
+                            checkSwipe(firstTouchTrans, secondTouchTrans, true);
+                            secondTouchTrans = null;
+                        }
                     }
                     //Detects swipe after finger is released
                     if (myTouches[i].phase == TouchPhase.Ended)
                     {
-                        if (secondTouchTrans != null) checkSwipe(firstTouchTrans, secondTouchTrans, true);
+                        if (secondTouchTrans != null) 
+                        {
+                            checkSwipe(firstTouchTrans, secondTouchTrans, true);
+                            secondTouchTrans = null;
+                        }                    
                     }
                 }
             }      

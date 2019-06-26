@@ -231,7 +231,9 @@ public class LayerRotate : MonoBehaviour
     {
         // Preventing touch interference
         if (m_Rotating || 
-            largeCollider.GetComponent<MultiTouchRubiksRotate>().m_largeRotating)
+            largeCollider.GetComponent<MultiTouchRubiksRotate>().m_largeRotating 
+            //|| !largeCollider.GetComponent<MultiTouchRubiksRotate>().startedOnCube
+            )
         {
             return;
         }
