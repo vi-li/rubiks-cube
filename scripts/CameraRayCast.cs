@@ -1,16 +1,14 @@
-using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine;
 
-public class DisableMasterCube : MonoBehaviour
+public class CameraRayCast : MonoBehaviour
 {
-    public float MAX_RAY_DISTANCE = 100.0f;
-    public float fadeAnimationLength = 10f; // in seconds
-    public GameObject fadeCube;
+    private GameObject doneButton = null;
+    private float MAX_RAY_DISTANCE = 100.0f;
     // Start is called before the first frame update
     void Start()
     {
-
+        doneButton = GameObject.Find("Done Button");
     }
     // Update is called once per frame
     void Update()
@@ -23,18 +21,16 @@ public class DisableMasterCube : MonoBehaviour
             {
                 Ray ray = Camera.main.ScreenPointToRay(myTouches[i].position);
                 RaycastHit hit;
+                
                 Physics.Raycast(ray, out hit, MAX_RAY_DISTANCE);
 
-                if (myTouches[i].phase == TouchPhase.Began && hit.transform.gameObject.tag == "switchScene")
+                if (hit.transform.gameObject == doneButton)
                 {
-                    fadeOut();
+                    doneButton.GetComponent<FinishFourDots>().readyToMove = true;
                 }
-            }   
-        }
-    }
+                
+            }
 
-    void fadeOut()
-    {
-        fadeCube.GetComponent<Animator>().SetTrigger("fadeOutToGroup - Trigger");
+        }
     }
 }

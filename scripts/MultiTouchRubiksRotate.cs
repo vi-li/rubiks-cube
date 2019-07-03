@@ -44,8 +44,8 @@ public class MultiTouchRubiksRotate : MonoBehaviour
           }
 
           cubeItself.transform.Rotate(myTouches[i].deltaPosition.y * rotSpeed * Time.deltaTime, 
-                                      myTouches[i].deltaPosition.x * rotSpeed * Time.deltaTime, 
                                       0f, 
+                                      -myTouches[i].deltaPosition.x * rotSpeed * Time.deltaTime, 
                                       Space.World);
 
           if (myTouches[i].phase == TouchPhase.Ended)

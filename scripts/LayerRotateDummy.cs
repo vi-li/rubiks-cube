@@ -1,100 +1,100 @@
 using System.Collections;
 using UnityEngine;
 
-public enum ELayer
-{
-    F, // front face
-    R, // right face
-    U, // upper face
-    L, // left face
-    B, // back face
-    D, // down face
-    M, // middle layer
-    E, // middle layer
-    S // middle layer
-}
+// public enum ELayer
+// {
+//     F, // front face
+//     R, // right face
+//     U, // upper face
+//     L, // left face
+//     B, // back face
+//     D, // down face
+//     M, // middle layer
+//     E, // middle layer
+//     S // middle layer
+// }
  
  
-public struct CubeLayer
-{
-    public Transform center;
-    public Transform c0, c1, c2, c3, c4, c5, c6, c7;
-    public Vector3 normal;
-    public CubeLayer(Transform aCenter, Transform aC0, Transform aC1, Transform aC2, Transform aC3, 
-                     Transform aC4, Transform aC5, Transform aC6, Transform aC7, Vector3 aNormal)
-    {
-        m_Index = -1;
-        center = aCenter;
-        normal = aNormal;
-        c0 = aC0; c1 = aC1; c2 = aC2; c3 = aC3;
-        c4 = aC4; c5 = aC5; c6 = aC6; c7 = aC7;
-    }
-    public CubeLayer RotateCW()                                                 // c0 c1 c2 --> c6 c7 c0
-    {                                                                           // c7 C  c3 --> c5 C  c1
-        return new CubeLayer(center, c6, c7, c0, c1, c2, c3, c4, c5, normal);   // c6 c5 c4 --> c4 c3 c2
-    }
-    public CubeLayer RotateCCW()                                                // c0 c1 c2 --> c2 c3 c4
-    {                                                                           // c7 C  c3 --> c1 C  c5
-        return new CubeLayer(center, c2, c3, c4, c5, c6, c7, c0, c1, normal);   // c6 c5 c4 --> c0 c7 c6
-    }
-    public Transform this[int index]
-    {
-        get
-        {
-            switch (index)
-            {
-                case 0: return center;
-                case 1: return c0;
-                case 2: return c1;
-                case 3: return c2;
-                case 4: return c3;
-                case 5: return c4;
-                case 6: return c5;
-                case 7: return c6;
-                case 8: return c7;
-                default: return null;
-            }
-        }
-        set
-        {
-            switch (index)
-            {
-                case 0: center = value; return;
-                case 1: c0 = value; return;
-                case 2: c1 = value; return;
-                case 3: c2 = value; return;
-                case 4: c3 = value; return;
-                case 5: c4 = value; return;
-                case 6: c5 = value; return;
-                case 7: c6 = value; return;
-                case 8: c7 = value; return;
-            }
-        }
-    }
+// public struct CubeLayer
+// {
+//     public Transform center;
+//     public Transform c0, c1, c2, c3, c4, c5, c6, c7;
+//     public Vector3 normal;
+//     public CubeLayer(Transform aCenter, Transform aC0, Transform aC1, Transform aC2, Transform aC3, 
+//                      Transform aC4, Transform aC5, Transform aC6, Transform aC7, Vector3 aNormal)
+//     {
+//         m_Index = -1;
+//         center = aCenter;
+//         normal = aNormal;
+//         c0 = aC0; c1 = aC1; c2 = aC2; c3 = aC3;
+//         c4 = aC4; c5 = aC5; c6 = aC6; c7 = aC7;
+//     }
+//     public CubeLayer RotateCW()                                                 // c0 c1 c2 --> c6 c7 c0
+//     {                                                                           // c7 C  c3 --> c5 C  c1
+//         return new CubeLayer(center, c6, c7, c0, c1, c2, c3, c4, c5, normal);   // c6 c5 c4 --> c4 c3 c2
+//     }
+//     public CubeLayer RotateCCW()                                                // c0 c1 c2 --> c2 c3 c4
+//     {                                                                           // c7 C  c3 --> c1 C  c5
+//         return new CubeLayer(center, c2, c3, c4, c5, c6, c7, c0, c1, normal);   // c6 c5 c4 --> c0 c7 c6
+//     }
+//     public Transform this[int index]
+//     {
+//         get
+//         {
+//             switch (index)
+//             {
+//                 case 0: return center;
+//                 case 1: return c0;
+//                 case 2: return c1;
+//                 case 3: return c2;
+//                 case 4: return c3;
+//                 case 5: return c4;
+//                 case 6: return c5;
+//                 case 7: return c6;
+//                 case 8: return c7;
+//                 default: return null;
+//             }
+//         }
+//         set
+//         {
+//             switch (index)
+//             {
+//                 case 0: center = value; return;
+//                 case 1: c0 = value; return;
+//                 case 2: c1 = value; return;
+//                 case 3: c2 = value; return;
+//                 case 4: c3 = value; return;
+//                 case 5: c4 = value; return;
+//                 case 6: c5 = value; return;
+//                 case 7: c6 = value; return;
+//                 case 8: c7 = value; return;
+//             }
+//         }
+//     }
  
-    // enumerable implementation
-    private int m_Index;
-    public CubeLayer GetEnumerator()
-    {
-        Reset();
-        return this;
-    }
-    public bool MoveNext()
-    {
-        return ++m_Index < 9;
-    }
-    public Transform Current
-    {
-        get { return this[m_Index]; }
-    }
-    public void Reset()
-    {
-        m_Index = -1;
-    }
-}
+//     // enumerable implementation
+//     private int m_Index;
+//     public CubeLayer GetEnumerator()
+//     {
+//         Reset();
+//         return this;
+//     }
+//     public bool MoveNext()
+//     {
+//         return ++m_Index < 9;
+//     }
+//     public Transform Current
+//     {
+//         get { return this[m_Index]; }
+//     }
+//     public void Reset()
+//     {
+//         m_Index = -1;
+//     }
+// }
  
  
-public class LayerRotate : MonoBehaviour
+public class LayerRotateDummy : MonoBehaviour
 {
     /*  Array layout
      *       c24  c25  c26
@@ -107,14 +107,14 @@ public class LayerRotate : MonoBehaviour
      *   |              |
      *   |   c6   c7   c8
      *   | c3   c4   c5
-     *   c0---c1---c2       Front in this POV is RED.
+     *   c0---c1---c2       Front in this POV is RED. (New rubik's cube POV's front is green...)
      *
      * */
  
-    public Transform[] Cubes;
+    public Transform[] Cubes;   // Checking this array.
     public Transform rotatePivot;
-    public GameObject cubeCase;
-    public GameObject largeCollider;
+    //public GameObject cubeCase;
+    //public GameObject largeCollider;
     private bool m_Rotating = false;
  
     public CubeLayer this[ELayer layer]
@@ -201,18 +201,7 @@ public class LayerRotate : MonoBehaviour
  
     private void Update()
     {
-        if (m_Rotating)
-            return;
-        bool counterclockwise = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
-        if (Input.GetKeyDown(KeyCode.F)) RotateLayer(ELayer.F, !counterclockwise);
-        else if (Input.GetKeyDown(KeyCode.B)) RotateLayer(ELayer.B, !counterclockwise);
-        else if (Input.GetKeyDown(KeyCode.L)) RotateLayer(ELayer.L, !counterclockwise);
-        else if (Input.GetKeyDown(KeyCode.R)) RotateLayer(ELayer.R, !counterclockwise);
-        else if (Input.GetKeyDown(KeyCode.U)) RotateLayer(ELayer.U, !counterclockwise);
-        else if (Input.GetKeyDown(KeyCode.D)) RotateLayer(ELayer.D, !counterclockwise);
-        else if (Input.GetKeyDown(KeyCode.M)) RotateLayer(ELayer.M, !counterclockwise);
-        else if (Input.GetKeyDown(KeyCode.E)) RotateLayer(ELayer.E, !counterclockwise);
-        else if (Input.GetKeyDown(KeyCode.S)) RotateLayer(ELayer.S, !counterclockwise);
+
     }
  
     public void RotateLayerCW(ELayer aLayer)
@@ -229,19 +218,19 @@ public class LayerRotate : MonoBehaviour
     }
     public void RotateLayer(ELayer aLayer, bool aClockwise)
     {
-        // Preventing touch interference
-        if (m_Rotating || 
-            largeCollider.GetComponent<MultiTouchRubiksRotate>().m_largeRotating 
-            //|| !largeCollider.GetComponent<MultiTouchRubiksRotate>().startedOnCube
-           )
-        {
-            return;
-        }
+        // // Preventing touch interference
+        // if (m_Rotating || 
+        //     largeCollider.GetComponent<MultiTouchRubiksRotate>().m_largeRotating 
+        //     //|| !largeCollider.GetComponent<MultiTouchRubiksRotate>().startedOnCube
+        //     )
+        // {
+        //     return;
+        // }
 
-        if (aClockwise)
-            RotateLayerCW(aLayer);
-        else
-            RotateLayerCCW(aLayer);
+        // if (aClockwise)
+        //     RotateLayerCW(aLayer);
+        // else
+        //     RotateLayerCCW(aLayer);
     }
  
     IEnumerator RotateLayer(CubeLayer aLayer, float aDegree, float aSpeed)
