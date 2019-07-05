@@ -5,7 +5,7 @@ using UnityEngine;
 public class DisableMasterCube : MonoBehaviour
 {
     public float MAX_RAY_DISTANCE = 100.0f;
-    public float fadeAnimationLength = 10f; // in seconds
+    public float fadeAnimationLength = 2f; // in seconds
     public GameObject fadeCube;
     // Start is called before the first frame update
     void Start()

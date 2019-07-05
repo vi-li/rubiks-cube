@@ -35,6 +35,6 @@ public class EnableMasterCube : MonoBehaviour
 
     void fadeOut()
     {
-        fadeCube.GetComponent<Animator>().SetBool("fadeOutToMaster", true);
+        fadeCube.GetComponent<Animator>().SetTrigger("fadeOutToMaster - Trigger");
     }
 }

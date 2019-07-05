@@ -3,12 +3,16 @@ using UnityEngine;
 
 public class CameraRayCast : MonoBehaviour
 {
-    private GameObject doneButton = null;
+    public GameObject masterActualCube;
+    public GameObject fadeCube;
+    public GameObject doneButton;
+    public float fadeAnimationLength = 2f; // in seconds
     private float MAX_RAY_DISTANCE = 100.0f;
+
     // Start is called before the first frame update
     void Start()
     {
-        doneButton = GameObject.Find("Done Button");
+
     }
     // Update is called once per frame
     void Update()
@@ -24,13 +28,29 @@ public class CameraRayCast : MonoBehaviour
                 
                 Physics.Raycast(ray, out hit, MAX_RAY_DISTANCE);
 
-                if (hit.transform.gameObject == doneButton)
+                if (myTouches[i].phase == TouchPhase.Began)
                 {
-                    doneButton.GetComponent<FinishFourDots>().readyToMove = true;
+                    if (hit.transform.gameObject.tag == "doneButton")
+                    {
+                        moveMasterToMiddle();
+                    } 
+                    else if (hit.transform.gameObject.tag == "switchScene") 
+                    {
+                        fadeOut();
+                    }
                 }
-                
             }
-
         }
+    }
+    
+    void moveMasterToMiddle()
+    {
+        masterActualCube.GetComponent<FinishFourDots>().readyToMove = true;
+        doneButton.GetComponent<Animator>().SetTrigger("moveToMiddle");
+    }
+    
+    void fadeOut()
+    {
+        fadeCube.GetComponent<Animator>().SetTrigger("fadeOutToGroup - Trigger");
     }
 }

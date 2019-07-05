@@ -13,6 +13,7 @@ public class FinishFourDots : MonoBehaviour
     private bool inCheckingCubeProcess = false;
     private bool inFixingCubeProcess = false;
     private bool inFourDotsProcess = false;
+    private bool isDone = false;
 
     private GameObject cubeCase = null;
     private GameObject actualCube = null;
@@ -73,8 +74,6 @@ public class FinishFourDots : MonoBehaviour
         {
             threeStepsMiniCubes[i] = threeStepsCube.GetComponent<LayerRotateDummy>().Cubes[i].gameObject;
         }
-        
-        Debug.Log("Should be done setting all vars");
     }
 
     // Update is called once per frame
@@ -82,29 +81,24 @@ public class FinishFourDots : MonoBehaviour
     {
         // readyToMove is forcibly set to true if the "done" button is pressed
 
-        if (inCheckingCubeProcess || inFixingCubeProcess || inFourDotsProcess)
+        if (inCheckingCubeProcess || inFixingCubeProcess || inFourDotsProcess || isDone)
         {
             return;
         }
 
         if (readyToMove && !arrivedAtMiddle)
         {
-            Debug.Log("Starting to move to middle");
             moveToMiddle();
         }
 
         if (arrivedAtMiddle)
         {
-            Debug.Log("Apple");
-            Debug.Log(middleMiniCubes[0].name + " " + threeStepsMiniCubes[0].name);
             if (checkCubeStatus())
             {
                 StartCoroutine(finishFourDots(false));
 
             } else
             {
-                Debug.Log("Butter");
-                Debug.Log(middleMiniCubes[0].name + " " + threeStepsMiniCubes[0].name);
                 fixFourDots();
             }
         }
@@ -116,10 +110,9 @@ public class FinishFourDots : MonoBehaviour
         float step = speed * Time.deltaTime;
         entireCubeSetUp.transform.position = Vector3.MoveTowards(entireCubeSetUp.transform.position, target.position, step);
 
-        if (Vector3.Distance(transform.position, target.transform.position) < DIST_EPSILON_FROM_MID)
+        if (Vector3.Distance(entireCubeSetUp.transform.position, target.transform.position) < DIST_EPSILON_FROM_MID)
         {
             arrivedAtMiddle = true;
-            Debug.Log("we have arrived at middle :)");
         }
     }
 
@@ -128,18 +121,15 @@ public class FinishFourDots : MonoBehaviour
     {
         inCheckingCubeProcess = true;
 
-        Debug.Log("Checking cube status");
         for (int i = 0; i < middleMiniCubes.Length; ++i)
         {
             middleMiniCubes[i] = GetComponent<LayerRotate>().Cubes[i].gameObject;
             if (middleMiniCubes[i].name != threeStepsMiniCubes[i].name)
             {
-                Debug.Log(middleMiniCubes[i].name + " " + threeStepsMiniCubes[i].name);
-                Debug.Log("NOT the same as three steps!!!");
+                inCheckingCubeProcess = false;
                 return false;
             }
         }
-        Debug.Log("same as 3 steps :)");
 
         inCheckingCubeProcess = false;
         return true;
@@ -147,20 +137,20 @@ public class FinishFourDots : MonoBehaviour
 
     IEnumerator finishFourDots(bool startFromBeginning)
     {
+        cubeCase.GetComponent<ContRotate>().enabled = true;
+       entireCubeSetUp.transform.Find("Large Collider").GetComponent<MultiTouchRubiksRotate>().enabled = false;
         inFourDotsProcess = true;
 
         if (startFromBeginning)
         {
-            Debug.Log("Finishing four dots, starting from beginning");
-            yield return StartCoroutine(rotateAll(ELayer.B, true));
-            yield return StartCoroutine(rotateAll(ELayer.B, true));
-            yield return StartCoroutine(rotateAll(ELayer.F, true));
+            yield return StartCoroutine (rotateAll(ELayer.B, true));
+            yield return StartCoroutine (rotateAll(ELayer.B, true));
+            yield return StartCoroutine (rotateAll(ELayer.F, true));
         }
 
         // Completed turns so far: B, B, F
-        Debug.Log("Finishing four dots, after 3 steps");
-        yield return StartCoroutine(rotateAll(ELayer.F, true));
         yield return StartCoroutine (rotateAll(ELayer.F, true));
+        yield return StartCoroutine (rotateAll(ELayer.D, true));
         yield return StartCoroutine (rotateAll(ELayer.U, true));
         yield return StartCoroutine (rotateAll(ELayer.U, true));
         yield return StartCoroutine (rotateAll(ELayer.U, true));
@@ -173,17 +163,17 @@ public class FinishFourDots : MonoBehaviour
         yield return StartCoroutine (rotateAll(ELayer.U, true));
         yield return StartCoroutine (rotateAll(ELayer.U, true));
 
+        isDone = true;
         inFourDotsProcess = false;
+        
     }
 
     void fixFourDots()
     {
         inFixingCubeProcess = true;
 
-        Debug.Log("Cube was not in 3 steps formation, fixing cube");
         for (int i = 0; i < outerActualCubes.Length; ++i)
         {
-            Debug.Log("Current Cube to fix: " + i);
             for (int j = 0; j < 27; ++j)
             {
                 //Debug.Log("" + j + " " + outerActualCubes[i].GetComponent<LayerRotate>().Cubes[j].gameObject.name + " " + j.ToString() + " " + outerActualCubes[i].transform.Find(j.ToString()).gameObject.name);
@@ -201,7 +191,6 @@ public class FinishFourDots : MonoBehaviour
             }
         }
 
-        Debug.Log("Fixing master cube");
         for (int j = 0; j < 27; ++j)
             {
                 layerRotate.Cubes[j] = transform.Find(j.ToString());
@@ -218,17 +207,16 @@ public class FinishFourDots : MonoBehaviour
 
         inFixingCubeProcess = false;
 
-        finishFourDots(true);
+        StartCoroutine(finishFourDots(true));
     }
 
-    IEnumerator rotateAll(ELayer aLayer, bool clockwise)
+    private IEnumerator rotateAll(ELayer aLayer, bool clockwise)
     {
-        Debug.Log("Rotating all... ");
         layerRotate.RotateLayer(aLayer, clockwise);
         for (int i = 0; i < outerActualCubes.Length; i++)
         {
             outerActualCubes[i].GetComponent<LayerRotate>().RotateLayer(aLayer, clockwise);
         }
-        return null;
+        yield return new WaitForSeconds(0.7f);
     }
 }
