@@ -138,7 +138,7 @@ public class FinishFourDots : MonoBehaviour
     IEnumerator finishFourDots(bool startFromBeginning)
     {
         cubeCase.GetComponent<ContRotate>().enabled = true;
-       entireCubeSetUp.transform.Find("Large Collider").GetComponent<MultiTouchRubiksRotate>().enabled = false;
+        entireCubeSetUp.transform.Find("Large Collider").GetComponent<MultiTouchRubiksRotate>().enabled = false;
         inFourDotsProcess = true;
 
         if (startFromBeginning)

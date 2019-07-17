@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class CameraRayCast : MonoBehaviour
+public class CameraRayCastMaster : MonoBehaviour
 {
     public GameObject masterActualCube;
     public GameObject fadeCube;

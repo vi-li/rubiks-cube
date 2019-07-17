@@ -14,7 +14,7 @@ public class TouchSideRotateNew : MonoBehaviour
      *   |              |
      *   |   c6   c7   c8
      *   | c3   c4   c5
-     *   c0---c1---c2       Front in this POV is RED. Up is WHITE. 
+     *   c0---c1---c2       Front in this POV is GREEN (previously red). Up is WHITE.
      *
      * */
 
@@ -27,7 +27,7 @@ public class TouchSideRotateNew : MonoBehaviour
 
     public float MAX_SWIPE_LENGTH = 30f;
     public float MIN_SWIPE_LENGTH = 0.5f;
-    public float MAX_RAY_DISTANCE = 100.0f;
+    //public float MAX_RAY_DISTANCE = 100.0f;
     public GameObject actualCube;
     public int cubeIndex; // 0-6, number of rubik's cubes
     public Transform[] Colliders = new Transform[SM_COLL_ARR_SIZE];
@@ -41,54 +41,91 @@ public class TouchSideRotateNew : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.touchCount > 0)
+        // OLD RAYCASTING CODE - THIS HAS BEEN MOVED INTO CameraRayCastGroup.cs and resolve func
+        // OLD RAYCASTING CODE - THIS HAS BEEN MOVED INTO CameraRayCastGroup.cs and resolve func
+        // OLD RAYCASTING CODE - THIS HAS BEEN MOVED INTO CameraRayCastGroup.cs and resolve func
+
+        // if (Input.touchCount > 0)
+        // {
+        //     Touch[] myTouches = Input.touches;
+
+        //     for (int i = 0; i < Input.touchCount; i++)
+        //     {
+        //         Ray ray = Camera.main.ScreenPointToRay(myTouches[i].position);
+        //         RaycastHit hit;
+        //         Physics.Raycast(ray, out hit, MAX_RAY_DISTANCE);
+
+        //         if (hit.collider.tag == ("smallColliders" + cubeIndex))
+        //         {
+        //             // Detect swipe start
+        //             if (myTouches[i].phase == TouchPhase.Began)
+        //             {
+        //                 firstTouchTrans = hit.transform;
+
+        //                 secondTouchTrans = null;
+        //                 readyToDetectSecond = true;
+        //             }
+        //             //Detects swipe while finger is still moving
+        //             if (myTouches[i].phase == TouchPhase.Moved)
+        //             {   // Insert anything to do while moving here <---
+        //                 if (readyToDetectSecond && hit.transform != firstTouchTrans)
+        //                 {
+        //                     secondTouchTrans = hit.transform;
+        //                     readyToDetectSecond = false;
+        //                 }
+
+        //                 if (secondTouchTrans != null) 
+        //                 {
+        //                     checkSwipe(firstTouchTrans, secondTouchTrans, true);
+        //                     secondTouchTrans = null;
+        //                 }
+        //             }
+        //             //Detects swipe after finger is released
+        //             if (myTouches[i].phase == TouchPhase.Ended)
+        //             {
+        //                 if (secondTouchTrans != null) 
+        //                 {
+        //                     checkSwipe(firstTouchTrans, secondTouchTrans, true);
+        //                     secondTouchTrans = null;
+        //                 }                    
+        //             }
+        //         }
+        //     }      
+        // }
+    }
+
+    public void resolveFirstSecondTouch(RaycastHit hit, Touch currTouch)
+    {
+        if (currTouch.phase == TouchPhase.Began)
         {
-            Touch[] myTouches = Input.touches;
+            firstTouchTrans = hit.transform;
 
-            for (int i = 0; i < Input.touchCount; i++)
+            secondTouchTrans = null;
+            readyToDetectSecond = true;
+        }
+        //Detects swipe while finger is still moving
+        if (currTouch.phase == TouchPhase.Moved)
+        {   // Insert anything to do while moving here <---
+            if (readyToDetectSecond && hit.transform != firstTouchTrans)
             {
-                Ray ray = Camera.main.ScreenPointToRay(myTouches[i].position);
-                RaycastHit hit;
-                Physics.Raycast(ray, out hit, MAX_RAY_DISTANCE);
+                secondTouchTrans = hit.transform;
+                readyToDetectSecond = false;
+            }
 
-                if (hit.collider.tag == ("smallColliders" + cubeIndex))
-                {
-                    // Debug.Log(hit.transform.name);
-
-                    // Detect swipe start
-                    if (myTouches[i].phase == TouchPhase.Began)
-                    {
-                        firstTouchTrans = hit.transform;
-
-                        secondTouchTrans = null;
-                        readyToDetectSecond = true;
-                    }
-                    //Detects swipe while finger is still moving
-                    if (myTouches[i].phase == TouchPhase.Moved)
-                    {   // Insert anything to do while moving here <---
-                        if (readyToDetectSecond && hit.transform != firstTouchTrans)
-                        {
-                            secondTouchTrans = hit.transform;
-                            readyToDetectSecond = false;
-                        }
-
-                        if (secondTouchTrans != null) 
-                        {
-                            checkSwipe(firstTouchTrans, secondTouchTrans, true);
-                            secondTouchTrans = null;
-                        }
-                    }
-                    //Detects swipe after finger is released
-                    if (myTouches[i].phase == TouchPhase.Ended)
-                    {
-                        if (secondTouchTrans != null) 
-                        {
-                            checkSwipe(firstTouchTrans, secondTouchTrans, true);
-                            secondTouchTrans = null;
-                        }                    
-                    }
-                }
-            }      
+            if (secondTouchTrans != null) 
+            {
+                checkSwipe(firstTouchTrans, secondTouchTrans, true);
+                secondTouchTrans = null;
+            }
+        }
+        // Detects swipe after finger is released
+        if (currTouch.phase == TouchPhase.Ended)
+        {
+            if (secondTouchTrans != null) 
+            {
+                checkSwipe(firstTouchTrans, secondTouchTrans, true);
+                secondTouchTrans = null;
+            }                    
         }
     }
 
