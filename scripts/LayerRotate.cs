@@ -116,6 +116,7 @@ public class LayerRotate : MonoBehaviour
     public GameObject cubeCase;
     public GameObject largeCollider;
     private bool m_Rotating = false;
+    private bool masterRotating = false;    // Purpose is to allow synced rotation even if user is holding.
  
     public CubeLayer this[ELayer layer]
     {
@@ -201,7 +202,7 @@ public class LayerRotate : MonoBehaviour
  
     private void Update()
     {
-        if (m_Rotating)
+        if (m_Rotating && !masterRotating)
             return;
         bool counterclockwise = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
         if (Input.GetKeyDown(KeyCode.F)) RotateLayer(ELayer.F, !counterclockwise);
@@ -229,9 +230,10 @@ public class LayerRotate : MonoBehaviour
     }
     public void RotateLayer(ELayer aLayer, bool aClockwise)
     {
-        // Preventing touch interference
+        // Preventing touch interference, 
+        // ... BUT we DO want rotation to occur if outside master cube is forcing it.
         if (m_Rotating || 
-            largeCollider.GetComponent<MultiTouchRubiksRotate>().m_largeRotating 
+            (largeCollider.GetComponent<MultiTouchRubiksRotate>().m_largeRotating && !masterRotating)
             //|| !largeCollider.GetComponent<MultiTouchRubiksRotate>().startedOnCube
            )
         {
@@ -269,5 +271,20 @@ public class LayerRotate : MonoBehaviour
         foreach (Transform t in aLayer)
             t.parent = transform;
         m_Rotating = false;
+    }
+
+    public bool getRotatingBool()
+    {
+        return m_Rotating;
+    }
+
+    public bool getMasterRotating()
+    {
+        return masterRotating;
+    }
+
+    public void setMasterRotating(bool newMasterRotating)
+    {
+        masterRotating = newMasterRotating;
     }
 }

@@ -24,6 +24,7 @@ public class TouchSideRotateMaster : MonoBehaviour
     private Transform secondTouchTrans;
     private bool readyToDetectSecond = true;
     private TextMeshProCounter textMeshPro = null;
+    private LayerRotate layerRotate = null;
 
 
     public float MAX_SWIPE_LENGTH = 30f;
@@ -40,13 +41,16 @@ public class TouchSideRotateMaster : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Ensure that all collider children are in correct order in the inspector.
+        // IMPORTANT!: Ensure that all collider children are in correct order in the inspector.
         for (int i = 0; i < Colliders.Length; ++i)
         {
             Colliders[i] = transform.GetChild(i);
         }
 
         textMeshPro = GameObject.Find("Canvas/Counter").gameObject.GetComponent<TextMeshProCounter>();
+        textMeshPro.setCounter(0);
+
+        layerRotate = actualCube.GetComponent<LayerRotate>();
     }
 
     // Update is called once per frame
@@ -62,7 +66,8 @@ public class TouchSideRotateMaster : MonoBehaviour
                 RaycastHit hit;
                 Physics.Raycast(ray, out hit, MAX_RAY_DISTANCE);
 
-                if (hit.collider.tag == ("smallColliders" + cubeIndex) && !largeCollider.GetComponent<MultiTouchRubiksRotate>().m_largeRotating)
+                if (hit.collider.tag == ("smallColliders" + cubeIndex) && 
+                   !largeCollider.GetComponent<MultiTouchRubiksRotate>().m_largeRotating)
                 {
                     // Debug.Log(hit.transform.name);
 
@@ -365,6 +370,7 @@ public class TouchSideRotateMaster : MonoBehaviour
         }
 
         // EQUATORIAL
+        else
         if ((fT == Colliders[3]  && sT == Colliders[4])  ||
             (fT == Colliders[4]  && sT == Colliders[5])  ||
             (fT == Colliders[5]  && sT == Colliders[12]) ||
@@ -476,14 +482,20 @@ public class TouchSideRotateMaster : MonoBehaviour
 
     void rotateAll(ELayer aLayer, bool clockwise)
     {
-        actualCube.GetComponent<LayerRotate>().RotateLayer(aLayer, clockwise);
-        //yield return StartCoroutine(addDelay());
-        for (int i = 0; i < actualCubesOuter.Length; i++)
+        // Only increment if it is the first rotation attempt out of one single swipe.
+        if (!layerRotate.getRotatingBool())
         {
-            actualCubesOuter[i].GetComponent<LayerRotate>().RotateLayer(aLayer, clockwise);
-        }
+            incMoveCounter();
 
-        incMoveCounter();
+            layerRotate.RotateLayer(aLayer, clockwise);
+            //yield return StartCoroutine(addDelay());
+            for (int i = 0; i < actualCubesOuter.Length; i++)
+            {
+                actualCubesOuter[i].GetComponent<LayerRotate>().setMasterRotating(true);
+                actualCubesOuter[i].GetComponent<LayerRotate>().RotateLayer(aLayer, clockwise);
+                actualCubesOuter[i].GetComponent<LayerRotate>().setMasterRotating(false);
+            }
+        }
     }
 
     void incMoveCounter()
@@ -491,8 +503,13 @@ public class TouchSideRotateMaster : MonoBehaviour
         textMeshPro.incCounter();
     }
 
+    void setMoveCounter(int numMoves)
+    {
+        textMeshPro.setCounter(numMoves);
+    }
+
     IEnumerator addDelay()
     {
-        yield return new WaitForSeconds(0);
+        yield return new WaitForSeconds(0.25f);
     }
 }

@@ -27,6 +27,7 @@ public class FinishFourDots : MonoBehaviour
     private GameObject[] threeStepsMiniCubes = null;
     private GameObject resetCube = null;
     private GameObject threeStepsCube = null;
+    private TextMeshProCounter textMeshPro = null;
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +36,7 @@ public class FinishFourDots : MonoBehaviour
         // Cube Cases, Actual Cubes, Large Colls
         /////////////////////////////////
         cubeCase = entireCubeSetUp.transform.Find("Cube Case").gameObject;
-        
+
         outerCubes = cubeCase.GetComponent<MatchRotationOnStart>().outerCubes;
         outerActualCubes = new GameObject[outerCubes.Length];
         outerLargeColliders = new GameObject[outerCubes.Length];
@@ -83,6 +84,11 @@ public class FinishFourDots : MonoBehaviour
         {
             threeStepsMiniCubes[i] = threeStepsCube.GetComponent<LayerRotateDummy>().Cubes[i].gameObject;
         }
+
+        ///////////////////
+        // Text Mesh Pro
+        ///////////////////
+        textMeshPro = GameObject.Find("Canvas/Counter").gameObject.GetComponent<TextMeshProCounter>();
     }
 
     // Update is called once per frame
@@ -152,9 +158,11 @@ public class FinishFourDots : MonoBehaviour
 
     IEnumerator finishFourDots(bool startFromBeginning)
     {
+        // Enable constant rotation motion, disable large rotation
         cubeCase.GetComponent<ContRotate>().enabled = true;
         entireCubeSetUp.transform.Find("Large Collider").GetComponent<MultiTouchRubiksRotate>().enabled = false;
         
+        // Disable rotation during four dots process
         if (outerLargeColliders != null)
         {        
             for (int i = 0; i < outerActualCubes.Length; i++)
@@ -165,6 +173,8 @@ public class FinishFourDots : MonoBehaviour
             Debug.Log("outerLargeColliders is NULL!");
         }
 
+        // Reset Counter
+        textMeshPro.setCounter(0);
         inFourDotsProcess = true;
 
         if (startFromBeginning)
@@ -252,6 +262,8 @@ public class FinishFourDots : MonoBehaviour
         {
             outerActualCubes[i].GetComponent<LayerRotate>().RotateLayer(aLayer, clockwise);
         }
+
+        textMeshPro.incCounter();
         yield return new WaitForSeconds(0.7f);
     }
 }

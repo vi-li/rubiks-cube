@@ -7,7 +7,6 @@ public class MultiTouchRubiksRotate : MonoBehaviour
   public int cubeIndex;
   public float rotSpeed = 10f;
   public float MAX_RAY_DISTANCE = 100.0f;
-  //public bool startedOnCube = false;
   public bool m_largeRotating = false;        // Exists so that rotation can continue over cube
 
   void Start()
