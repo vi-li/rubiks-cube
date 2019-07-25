@@ -37,7 +37,13 @@ public class TouchSideRotateNew : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // IMPORTANT!: Ensure that all collider children are in correct order in the inspector.
+        // **************************************************************************************
+        // IMPORTANT!: Ensure that all collider children are in correct order in the hierarchy.
+        // Correct order is listed below in "Small Colliders Array Setup". 
+        // IF YOU HAVE THE SMALL COLLIDERS IN THE RIGHT ORDER IN HIERARCHY, 
+        // YOU DO NOT NEED TO MANUALLY ASSIGN SMALL COLLIDERS IN INSPECTOR.
+        // (If you come up with a better way to do this, feel free to restructure.)
+        // **************************************************************************************
         for (int i = 0; i < Colliders.Length; ++i)
         {
             Colliders[i] = transform.GetChild(i);
@@ -51,9 +57,9 @@ public class TouchSideRotateNew : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // OLD RAYCASTING CODE - THIS HAS BEEN MOVED INTO CameraRayCastGroup.cs and resolve func
-        // OLD RAYCASTING CODE - THIS HAS BEEN MOVED INTO CameraRayCastGroup.cs and resolve func
-        // OLD RAYCASTING CODE - THIS HAS BEEN MOVED INTO CameraRayCastGroup.cs and resolve func
+        // OLD RAYCASTING CODE - THIS HAS BEEN MOVED INTO CameraRayCastGroup.cs and the below resolve func
+        // OLD RAYCASTING CODE - THIS HAS BEEN MOVED INTO CameraRayCastGroup.cs and the below resolve func
+        // OLD RAYCASTING CODE - THIS HAS BEEN MOVED INTO CameraRayCastGroup.cs and the below resolve func
 
         // if (Input.touchCount > 0)
         // {
@@ -140,7 +146,7 @@ public class TouchSideRotateNew : MonoBehaviour
     }
 
     /*
-    SMALL COLLIDERS ARRAY SETUP
+    SMALL COLLIDERS ARRAY SETUP (not the most elegant method, but it works?)
     Elem:      Collider:
     0           0F
     1           1F

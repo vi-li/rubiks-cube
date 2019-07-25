@@ -133,7 +133,8 @@ public class FinishFourDots : MonoBehaviour
         }
         */
 
-        // Placeholder, since we aren't moving to the side anymore. Delete if re-enabling side motion.
+        // Placeholder, since we aren't moving to the side anymore. 
+        // Comment out the following line if re-enabling side motion.
         arrivedAtMiddle = true;
     }
 

@@ -158,7 +158,7 @@ public class TouchSideRotateMaster : MonoBehaviour
     52          3D
     53          0D
 
-    Not the most efficient code out there, but it works for now.
+    NOT efficient code, but it works for now.
     Look into storing indices in data structures corresponding to 
     their face and searching through each "face" before going through all
     ORs and ANDs.
@@ -181,22 +181,6 @@ public class TouchSideRotateMaster : MonoBehaviour
             (fT == Colliders[32] && sT == Colliders[29]))
         {
             rotateAll(ELayer.F, clockwise);
-            // if (clockwise) 
-            // {
-            //     actualCube.GetComponent<LayerRotate>().RotateLayer(ELayer.F, true);
-            //     //yield return StartCoroutine(addDelay());
-            //     for (int i = 0; i < actualCubesOuter.Length; i++)
-            //     {
-            //         actualCubesOuter[i].GetComponent<LayerRotate>().RotateLayer(ELayer.F, true);
-            //     }
-            // } else {
-            //     actualCube.GetComponent<LayerRotate>().RotateLayer(ELayer.F, false);
-            //     //yield return StartCoroutine(addDelay());
-            //     for (int i = 0; i < actualCubesOuter.Length; i++)
-            //     {
-            //         actualCubesOuter[i].GetComponent<LayerRotate>().RotateLayer(ELayer.F, false);
-            //     }
-            // }
         }
 
         // BACK
@@ -215,22 +199,6 @@ public class TouchSideRotateMaster : MonoBehaviour
             (fT == Colliders[11] && sT == Colliders[36]))
         {
             rotateAll(ELayer.B, clockwise);
-            // if (clockwise) 
-            // {
-            //     actualCube.GetComponent<LayerRotate>().RotateLayer(ELayer.B, true);
-            //     //yield return StartCoroutine(addDelay());
-            //     for (int i = 0; i < actualCubesOuter.Length; i++)
-            //     {
-            //         actualCubesOuter[i].GetComponent<LayerRotate>().RotateLayer(ELayer.B, true);
-            //     }
-            // } else {
-            //     actualCube.GetComponent<LayerRotate>().RotateLayer(ELayer.B, false);
-            //     //yield return StartCoroutine(addDelay());
-            //     for (int i = 0; i < actualCubesOuter.Length; i++)
-            //     {
-            //         actualCubesOuter[i].GetComponent<LayerRotate>().RotateLayer(ELayer.B, false);
-            //     }
-            // }
         }
 
         // LEFT
@@ -249,22 +217,6 @@ public class TouchSideRotateMaster : MonoBehaviour
             (fT == Colliders[44] && sT == Colliders[6]))
         {
             rotateAll(ELayer.L, clockwise);
-            // if (clockwise) 
-            // {
-            //     actualCube.GetComponent<LayerRotate>().RotateLayer(ELayer.L, true);
-            //     //yield return StartCoroutine(addDelay());
-            //     for (int i = 0; i < actualCubesOuter.Length; i++)
-            //     {
-            //         actualCubesOuter[i].GetComponent<LayerRotate>().RotateLayer(ELayer.L, true);
-            //     }
-            // } else {
-            //     actualCube.GetComponent<LayerRotate>().RotateLayer(ELayer.L, false);
-            //     //yield return StartCoroutine(addDelay());
-            //     for (int i = 0; i < actualCubesOuter.Length; i++)
-            //     {
-            //         actualCubesOuter[i].GetComponent<LayerRotate>().RotateLayer(ELayer.L, false);
-            //     }
-            // }
         }
 
         // RIGHT
@@ -283,22 +235,6 @@ public class TouchSideRotateMaster : MonoBehaviour
             (fT == Colliders[36] && sT == Colliders[18]))
         {
             rotateAll(ELayer.R, clockwise);
-            // if (clockwise) 
-            // {
-            //     actualCube.GetComponent<LayerRotate>().RotateLayer(ELayer.R, true);
-            //     //yield return StartCoroutine(addDelay());
-            //     for (int i = 0; i < actualCubesOuter.Length; i++)
-            //     {
-            //         actualCubesOuter[i].GetComponent<LayerRotate>().RotateLayer(ELayer.R, true);
-            //     }
-            // } else {
-            //     actualCube.GetComponent<LayerRotate>().RotateLayer(ELayer.R, false);
-            //     //yield return StartCoroutine(addDelay());
-            //     for (int i = 0; i < actualCubesOuter.Length; i++)
-            //     {
-            //         actualCubesOuter[i].GetComponent<LayerRotate>().RotateLayer(ELayer.R, false);
-            //     }
-            // }
         }
 
         // UP
@@ -317,22 +253,6 @@ public class TouchSideRotateMaster : MonoBehaviour
             (fT == Colliders[6]  && sT == Colliders[29]))
         {
             rotateAll(ELayer.U, clockwise);
-            // if (clockwise) 
-            // {
-            //     actualCube.GetComponent<LayerRotate>().RotateLayer(ELayer.U, true);
-            //     //yield return StartCoroutine(addDelay());
-            //     for (int i = 0; i < actualCubesOuter.Length; i++)
-            //     {
-            //         actualCubesOuter[i].GetComponent<LayerRotate>().RotateLayer(ELayer.U, true);
-            //     }
-            // } else {
-            //     actualCube.GetComponent<LayerRotate>().RotateLayer(ELayer.U, false);
-            //     //yield return StartCoroutine(addDelay());
-            //     for (int i = 0; i < actualCubesOuter.Length; i++)
-            //     {
-            //         actualCubesOuter[i].GetComponent<LayerRotate>().RotateLayer(ELayer.U, false);
-            //     }
-            // }
         }
 
         // DOWN
@@ -351,22 +271,6 @@ public class TouchSideRotateMaster : MonoBehaviour
             (fT == Colliders[35] && sT == Colliders[0]))
         {
             rotateAll(ELayer.D, clockwise);
-            // if (clockwise) 
-            // {
-            //     actualCube.GetComponent<LayerRotate>().RotateLayer(ELayer.D, true);
-            //     //yield return StartCoroutine(addDelay());
-            //     for (int i = 0; i < actualCubesOuter.Length; i++)
-            //     {
-            //         actualCubesOuter[i].GetComponent<LayerRotate>().RotateLayer(ELayer.D, true);
-            //     }
-            // } else {
-            //     actualCube.GetComponent<LayerRotate>().RotateLayer(ELayer.D, false);
-            //     //yield return StartCoroutine(addDelay());
-            //     for (int i = 0; i < actualCubesOuter.Length; i++)
-            //     {
-            //         actualCubesOuter[i].GetComponent<LayerRotate>().RotateLayer(ELayer.D, false);
-            //     }
-            // }
         }
 
         // EQUATORIAL
@@ -384,23 +288,7 @@ public class TouchSideRotateMaster : MonoBehaviour
             (fT == Colliders[31] && sT == Colliders[32]) ||
             (fT == Colliders[32] && sT == Colliders[3]))
         {
-            rotateAll(ELayer.E, clockwise);
-            // if (clockwise) 
-            // {
-            //     actualCube.GetComponent<LayerRotate>().RotateLayer(ELayer.E, true);
-            //     //yield return StartCoroutine(addDelay());
-            //     for (int i = 0; i < actualCubesOuter.Length; i++)
-            //     {
-            //         actualCubesOuter[i].GetComponent<LayerRotate>().RotateLayer(ELayer.E, true);
-            //     }
-            // } else {
-            //     actualCube.GetComponent<LayerRotate>().RotateLayer(ELayer.E, false);
-            //     //yield return StartCoroutine(addDelay());
-            //     for (int i = 0; i < actualCubesOuter.Length; i++)
-            //     {
-            //         actualCubesOuter[i].GetComponent<LayerRotate>().RotateLayer(ELayer.E, false);
-            //     }
-            // }        
+            rotateAll(ELayer.E, clockwise);        
         }
 
         // MIDDLE
@@ -419,22 +307,6 @@ public class TouchSideRotateMaster : MonoBehaviour
             (fT == Colliders[41] && sT == Colliders[7]))
         {
             rotateAll(ELayer.M, clockwise);
-            // if (clockwise) 
-            // {
-            //     actualCube.GetComponent<LayerRotate>().RotateLayer(ELayer.M, true);
-            //     //yield return StartCoroutine(addDelay());
-            //     for (int i = 0; i < actualCubesOuter.Length; i++)
-            //     {
-            //         actualCubesOuter[i].GetComponent<LayerRotate>().RotateLayer(ELayer.M, true);
-            //     }
-            // } else {
-            //     actualCube.GetComponent<LayerRotate>().RotateLayer(ELayer.M, false);
-            //     //yield return StartCoroutine(addDelay());
-            //     for (int i = 0; i < actualCubesOuter.Length; i++)
-            //     {
-            //         actualCubesOuter[i].GetComponent<LayerRotate>().RotateLayer(ELayer.M, false);
-            //     }
-            // }
         }
 
         // S(ide middle?) (Standing)
@@ -453,26 +325,9 @@ public class TouchSideRotateMaster : MonoBehaviour
             (fT == Colliders[28] && sT == Colliders[43]))
         {
             rotateAll(ELayer.S, clockwise);
-            // if (clockwise) 
-            // {
-            //     actualCube.GetComponent<LayerRotate>().RotateLayer(ELayer.S, true);
-            //     //yield return StartCoroutine(addDelay());
-            //     for (int i = 0; i < actualCubesOuter.Length; i++)
-            //     {
-            //         actualCubesOuter[i].GetComponent<LayerRotate>().RotateLayer(ELayer.S, true);
-            //     }
-            // } else {
-                
-            //     actualCube.GetComponent<LayerRotate>().RotateLayer(ELayer.S, false);
-            //     //yield return StartCoroutine(addDelay());
-            //     for (int i = 0; i < actualCubesOuter.Length; i++)
-            //     {
-            //         actualCubesOuter[i].GetComponent<LayerRotate>().RotateLayer(ELayer.S, false);
-            //     }
-            // }
         }
 
-        // If reached, NOT CLOCKWISE! SWAP DIRECTIONS
+        // If reached, THE SWIPED DIRECTION WAS NOT SUPPOSED TO BE CLOCKWISE! SWAP DIRECTIONS
         else if (clockwise)
         {
             checkSwipe(sT, fT, false);
@@ -488,9 +343,12 @@ public class TouchSideRotateMaster : MonoBehaviour
             incMoveCounter();
 
             layerRotate.RotateLayer(aLayer, clockwise);
+
+            // Note: I failed to add working delay in time. Look into adding this delay below.
             //yield return StartCoroutine(addDelay());
             for (int i = 0; i < actualCubesOuter.Length; i++)
             {
+                // Bool manipulation: Allows synced rotation even if user is holding down side cube.
                 actualCubesOuter[i].GetComponent<LayerRotate>().setMasterRotating(true);
                 actualCubesOuter[i].GetComponent<LayerRotate>().RotateLayer(aLayer, clockwise);
                 actualCubesOuter[i].GetComponent<LayerRotate>().setMasterRotating(false);
@@ -508,8 +366,10 @@ public class TouchSideRotateMaster : MonoBehaviour
         textMeshPro.setCounter(numMoves);
     }
 
+    // Note: Failed to add working delay in time. Look into adding this delay below.
     IEnumerator addDelay()
     {
         yield return new WaitForSeconds(0.25f);
+        
     }
 }

@@ -106,15 +106,13 @@ public class LayerRotateDummy : MonoBehaviour
      *   c9   c10  c11  |
      *   |              |
      *   |   c6   c7   c8
-     *   | c3   c4   c5
-     *   c0---c1---c2       Front in this POV is RED. (New rubik's cube POV's front is green...)
+     *   | c3   c4   c5     Top in this POV is WHITE.
+     *   c0---c1---c2       Front in this POV is GREEN. (Previous iteration's front was red.)
      *
      * */
  
     public Transform[] Cubes;   // Checking this array.
     public Transform rotatePivot;
-    //public GameObject cubeCase;
-    //public GameObject largeCollider;
     private bool m_Rotating = false;
  
     public CubeLayer this[ELayer layer]
@@ -218,6 +216,8 @@ public class LayerRotateDummy : MonoBehaviour
     }
     public void RotateLayer(ELayer aLayer, bool aClockwise)
     {
+        // THE FOLLOWING IS COMMENTED OUT BECAUSE WE DO NOT WANT DUMMY CUBES TO CHANGE (not elegant, but works)
+    
         // // Preventing touch interference
         // if (m_Rotating || 
         //     largeCollider.GetComponent<MultiTouchRubiksRotate>().m_largeRotating 

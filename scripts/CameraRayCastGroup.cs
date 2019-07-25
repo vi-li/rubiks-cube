@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraRayCastGroup : MonoBehaviour
 {
@@ -36,6 +37,12 @@ public class CameraRayCastGroup : MonoBehaviour
                     hit.transform.gameObject.tag == "switchScene")
                 {
                     fadeOut();
+                }
+
+                if (myTouches[i].phase == TouchPhase.Began && 
+                    hit.transform.gameObject.tag == "reloadScene")
+                {
+                    SceneManager.LoadScene("RubiksCubesGroup");
                 }
 
                 // /////////////////

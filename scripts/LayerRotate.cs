@@ -106,8 +106,8 @@ public class LayerRotate : MonoBehaviour
      *   c9   c10  c11  |
      *   |              |
      *   |   c6   c7   c8
-     *   | c3   c4   c5
-     *   c0---c1---c2       Front in this POV is RED.
+     *   | c3   c4   c5     Top in this POV is WHITE.
+     *   c0---c1---c2       Front in this POV is GREEN. (Previous iteration's front was red.)
      *
      * */
  
@@ -116,7 +116,7 @@ public class LayerRotate : MonoBehaviour
     public GameObject cubeCase;
     public GameObject largeCollider;
     private bool m_Rotating = false;
-    private bool masterRotating = false;    // Purpose is to allow synced rotation even if user is holding.
+    private bool masterRotating = false;    // Purpose is to allow synced rotation even if user is holding down.
  
     public CubeLayer this[ELayer layer]
     {
@@ -234,7 +234,6 @@ public class LayerRotate : MonoBehaviour
         // ... BUT we DO want rotation to occur if outside master cube is forcing it.
         if (m_Rotating || 
             (largeCollider.GetComponent<MultiTouchRubiksRotate>().m_largeRotating && !masterRotating)
-            //|| !largeCollider.GetComponent<MultiTouchRubiksRotate>().startedOnCube
            )
         {
             return;
