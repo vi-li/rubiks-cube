@@ -18,14 +18,12 @@ public class FadeOnStart : MonoBehaviour
     void Update()
     {
        Color color = fadeMaterial.color;
-        // Debug.Log(" " + color.r + " " +  color.g + " " + color.b + " " + color.a);      // TODO: DEBUG REMOVE
         if (color.a > 0) {
             fadeMaterial.color = new Color(color.r, color.g, color.b, color.a - (fadePerSecond * Time.deltaTime));
         }
         else {
             fadeMaterial.color = new Color(color.r, color.g, color.b, 0.0f);
         }
-        // Debug.Log("Hi");                                                                // TODO: DEBUG REMOVE
     }
 
 }
